@@ -11,13 +11,22 @@ import UIKit
 class StatsViewController: UIViewController {
 
     @IBOutlet var doneLabel: UILabel!
-    
-    var doneCount = 0
-    
+    var todos : [Todo]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        doneLabel.text = String(doneCount) as String!
+        doneLabel.text = countTodos()
+    }
+    
+    func countTodos() -> String {
+        var count = 0;
+        for todo in todos! {
+            if todo.done {
+                count += 1
+            }
+        }
+        return String(count)
     }
 
     override func didReceiveMemoryWarning() {

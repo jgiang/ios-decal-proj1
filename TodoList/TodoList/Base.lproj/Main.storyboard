@@ -23,12 +23,12 @@
                                     <navigationItem title="Things To Do" id="8QG-Uf-qRV">
                                         <barButtonItem key="leftBarButtonItem" title="Stats" id="Mbu-H3-pVF">
                                             <connections>
-                                                <segue destination="1Zo-77-4f7" kind="presentation" id="www-ct-glC"/>
+                                                <segue destination="1Zo-77-4f7" kind="presentation" identifier="GoToStats" id="www-ct-glC"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zbr-7f-Xf1">
                                             <connections>
-                                                <segue destination="2oQ-I5-iU6" kind="presentation" id="VUa-fA-CIw"/>
+                                                <segue destination="2oQ-I5-iU6" kind="presentation" identifier="GoToAdd" id="VUa-fA-CIw"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -42,7 +42,7 @@
                                     <constraint firstAttribute="width" secondItem="cSu-6c-p4q" secondAttribute="height" multiplier="75:67" id="poK-N3-E1n"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="R1S-fg-wsk" style="IBUITableViewCellStyleDefault" id="Iej-WQ-bC0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="R1S-fg-wsk" style="IBUITableViewCellStyleDefault" id="Iej-WQ-bC0">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iej-WQ-bC0" id="GkS-xV-kyL">
@@ -147,9 +147,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBw-RO-0AP">
-                                <rect key="frame" x="279" y="289" width="42" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBw-RO-0AP">
+                                <rect key="frame" x="253" y="208" width="94" height="185"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="155"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -185,7 +185,7 @@
                         </connections>
                     </navigationItem>
                     <connections>
-                        <outlet property="doneCount" destination="yBw-RO-0AP" id="aWx-aN-jFs"/>
+                        <outlet property="doneLabel" destination="yBw-RO-0AP" id="bqy-fx-19r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9TC-UT-45J" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -232,7 +232,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="Yk5-0C-PXa" id="R3Y-8Z-XHR"/>
+                        <outlet property="addButton" destination="CFW-PL-9st" id="cuc-eU-F3X"/>
                         <outlet property="todoInput" destination="4U0-NC-ptp" id="kzR-nq-7sK"/>
                     </connections>
                 </viewController>

@@ -11,7 +11,7 @@ import UIKit
 class AddViewController: UIViewController {
     var todo : Todo?
     
-    @IBOutlet var addButton: UINavigationItem!
+    @IBOutlet var addButton: UIBarButtonItem!
     @IBOutlet var todoInput: UITextField!
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

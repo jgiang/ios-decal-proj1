@@ -8,35 +8,32 @@
 
 import UIKit
 
-var todos = [Todo]()
+//var todos = [Todo]()
 
 class ViewController: UIViewController {
     
     @IBOutlet var todoTable: UITableView!
-    var doneCount = 0;
-    
+    var todos = [Todo]()
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let todo = todos[indexPath.row] as Todo
         cell.textLabel!.text = todo.text
-        if (todo.done == true) {
+        if todo.done {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.None
         }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        var todo = todos[indexPath.row] as Todo
-        todo.done = !todo.done
-        if (todo.done) {
-            todo.doneTime = NSDate()
-            self.doneCount += 1
-        } else {
-            self.doneCount -= 1
+        todos[indexPath.row].done = !todos[indexPath.row].done
+        if todos[indexPath.row].done {
+            todos[indexPath.row].doneTime = NSDate()
         }
-        tableView.reloadData()
+        todoTable.reloadData()
 
     }
 
@@ -44,17 +41,38 @@ class ViewController: UIViewController {
         return todos.count
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            todos.removeAtIndex(indexPath.row)
+            todoTable.reloadData()
+        }
+    }
+    
     @IBAction func unwind(segue: UIStoryboardSegue) {
-
+  
     }
     
     @IBAction func unwindAdd(segue: UIStoryboardSegue) {
-        let source = segue.sourceViewController as! AddViewController
-        let todo = source.todo as Todo!
-        if (todo != nil) {
-            todos.append(todo)
-            print(todos)
-            todoTable.reloadData()
+        if let source = segue.sourceViewController as? AddViewController {
+            if let todo = source.todo {
+                todos.append(todo)
+                todoTable.reloadData()
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        for (var i = 0; i < todos.count; i++) {
+            if (todos[i].done && NSDate().timeIntervalSinceDate(todos[i].doneTime) > 86400) {
+                todos.removeAtIndex(i)
+            }
+        }
+        if segue.identifier == "GoToStats" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let dest = nav.topViewController as! StatsViewController
+            dest.todos = todos
         }
     }
     
