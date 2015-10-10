@@ -69,6 +69,7 @@ class ViewController: UIViewController {
                 todos.removeAtIndex(i)
             }
         }
+        todoTable.reloadData()
         if segue.identifier == "GoToStats" {
             let nav = segue.destinationViewController as! UINavigationController
             let dest = nav.topViewController as! StatsViewController
